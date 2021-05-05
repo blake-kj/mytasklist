@@ -83,10 +83,12 @@ function storeTaskInLocalStorage(task) {
 
 //Clear the unordered list
 function clearTasks() {
-  while(taskList.firstChild) {
-    taskList.removeChild(taskList.firstChild);
+  if(confirm('Are you sure you want to clear your tasks?')) {
+    while(taskList.firstChild) {
+      taskList.removeChild(taskList.firstChild);
+    }
+    clearTasksFromLocalStorage();
   }
-  clearTasksFromLocalStorage();
 }
 
 function clearTasksFromLocalStorage() {
@@ -95,7 +97,7 @@ function clearTasksFromLocalStorage() {
 
 function removeTask(e) {
   if(e.target.parentElement.classList.contains('delete-item')) {
-    if(confirm('Are you sure you want to delete this class?')) {
+    if(confirm('Are you sure you want to delete this task?')) {
       e.target.parentElement.parentElement.remove();
       removeTaskFromLocalStorage(e.target.parentElement.parentElement);
     }
